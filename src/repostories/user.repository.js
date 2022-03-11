@@ -8,3 +8,6 @@ export async function createOrUpdateUser(user) {
         throw error;
     }
 }
+
+// TODO: 
+// Add Password encryption, JWT and Save User Points
