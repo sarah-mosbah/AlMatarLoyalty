@@ -1,13 +1,23 @@
 import { UserEntity } from "../models/user.model.js";
-import mongoose from "mongoose";
-export async function createOrUpdateUser(user) {
+export async function createUser(user) {
     try {
-    const id = !user._id ? new mongoose.Types.ObjectId(): mongoose.Types.ObjectId(user._id);
-    return  await UserEntity.findByIdAndUpdate(id, user, { new: true, upsert: true }).lean();
+         return await UserEntity.create(user);
     } catch (error) {
         throw error;
     }
 }
 
+export async function getUser(email) {
+    try {
+         return await UserEntity.findOne({email}).lean();
+    } catch (error) {
+        throw error;
+    }
+}
+
+
 // TODO: 
-// Add Password encryption, JWT and Save User Points
+// AUTH MIDDLEWARE
+// nodemailer send user email --> transfer {userId from decoded token, transfererId: body, points: 500}, status --> pending, done
+// expirationTime as onetime url for transfer 
+// Once User Confirmed --> transaction (decrement user points, increment user points, change status)
