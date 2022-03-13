@@ -1,5 +1,5 @@
 import * as userService from '../../services/user.service.js';
-import * as userPointsservice from '../../services/points.service.js';
+import * as userPointsservice from '../../services/userPoints.service.js';
 import { signJwt } from '../../utils/jwt.utils.js';
 export async function createUser(req, res) {
     try {

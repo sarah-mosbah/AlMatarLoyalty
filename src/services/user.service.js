@@ -26,3 +26,10 @@ export  async function getUser(signedInUser) {
         throw error;
     }
 }
+export  async function getUserById(userId) {
+    try {
+      return await userRepository.getUserById(userId);
+    } catch (error) {
+        throw error;
+    }
+}

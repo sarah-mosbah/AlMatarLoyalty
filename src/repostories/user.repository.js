@@ -14,7 +14,13 @@ export async function getUser(email) {
         throw error;
     }
 }
-
+export async function getUserById(userId) {
+    try {
+         return await UserEntity.findById(userId).lean();
+    } catch (error) {
+        throw error;
+    }
+}
 
 // TODO: 
 // AUTH MIDDLEWARE

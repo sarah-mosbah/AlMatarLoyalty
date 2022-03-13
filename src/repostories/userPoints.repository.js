@@ -1,4 +1,4 @@
-import { UserPointsEntity } from "../models/point.model.js";
+import { UserPointsEntity } from "../models/userPoint.model.js";
 
 
 export async function createNewUserPoints(userId) {

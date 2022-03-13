@@ -1,4 +1,4 @@
-import * as userPointsRepository from '../repostories/points.repository.js';
+import * as userPointsRepository from '../repostories/userPoints.repository.js';
 export  async function createUserPoints(userId) {
     try {
     return await userPointsRepository.createNewUserPoints(userId);

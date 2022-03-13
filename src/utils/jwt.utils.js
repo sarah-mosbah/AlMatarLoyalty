@@ -9,3 +9,7 @@ export function signJwt(userData) {
     }
     return jwt.sign(data, jwtSecretKey);
 }
+
+export function getPayload(token) {
+    return jwt.decode(token);
+}
