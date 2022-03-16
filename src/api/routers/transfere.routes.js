@@ -5,4 +5,4 @@ import express from "express";
 export const router = express.Router();
 
 router.post('', authorization, transferValidator, transactionsHandler.transferPoints);
-router.post('/:transferId', authorization, transactionsHandler.confirmPointsTransefer);
+router.post('/:transferId/confirm', authorization, transactionsHandler.confirmPointsTransefer);
