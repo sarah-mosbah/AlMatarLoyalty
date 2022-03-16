@@ -7,7 +7,7 @@ export  async function createUserPoints(userId) {
     }
 }
 
-export  async function getUserPoints(userId) {
+export async function getUserPoints(userId) {
     try {
         return await userPointsRepository.getUserPoints(userId);
     } catch (error) {

@@ -1,19 +1,22 @@
-import * as transferService from '../../services/transfer.service.js' 
+import * as transferService from '../../services/transfer.service.js';
 import * as userService from '../../services/user.service.js';
 import * as userPointsService from '../../services/userPoints.service.js';
 import * as emailService from '../../services/email.service.js';
 import { getPayload } from '../../utils/jwt.utils.js';
-import { expired, confirmed} from '../../utils/transferStatus.utils.js';
+import { expired, confirmed } from '../../utils/transferStatus.utils.js';
 import moment from 'moment';
 export async function transferPoints(req, res) {
     let transfere;
     try {
-        const token = req.headers['authorization'].split('Bearer ')[1];
-        const transfererId = getPayload(token).userId;
+        const transfererId = getUserId(req);
         const pointsToTransfer = req.body;
-        const reciever = await userService.getUserById(req.body.recieverId);
+        const reciever = await userService.getUserById(pointsToTransfer.recieverId);
+        const transferer = await userPointsService.getUserPoints(transfererId);
         if(!reciever) {
             return res.status(404).json({message: 'This receiver user doesnt exis'});
+        }
+        if(transferer.points < pointsToTransfer.points)  {
+            return res.status(400).json({message: "User doesnt have enough points"});
         }
         transfere = await transferService.initTransfer({...pointsToTransfer, transfererId: transfererId});
         await emailService.sendEmail(reciever.email, pointsToTransfer.points);
@@ -29,8 +32,7 @@ export async function transferPoints(req, res) {
 
 export async function confirmPointsTransefer(req, res) {
     try {
-        const token = req.headers['authorization'].split('Bearer ')[1];
-        const userId = getPayload(token).userId;
+        const userId = getUserId(req);
         const transferId = req.params.transferId;
         const transfer = await transferService.getTransferById(transferId);
         if(!transfer) {
@@ -58,3 +60,7 @@ export async function confirmPointsTransefer(req, res) {
     }  
 }
 
+function getUserId(req) {
+    const token = req.headers['authorization'].split('Bearer ')[1];
+    return getPayload(token).userId;
+}

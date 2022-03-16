@@ -52,3 +52,12 @@ export async function confirmTransaction(receiverId, transfererId, transferedPoi
         throw error;
     }
 }
+
+
+export async function getUserTransferes(userId) {
+    try {
+      return await TransfersEntity.find({transfererId: userId}).lean();
+    } catch (error) {
+        throw error;
+    }
+}

@@ -37,3 +37,12 @@ export async function confirmTransaction(receiverId, transfererId, points, trans
         throw error;
     }
 }
+
+
+export async function getUserTransferes(userId) {
+    try {
+        return await transferRepository.getUserTransferes(userId);
+    } catch (error) {
+        throw error;
+    }
+}
