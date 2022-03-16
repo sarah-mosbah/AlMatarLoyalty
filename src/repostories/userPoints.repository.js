@@ -8,3 +8,11 @@ export async function createNewUserPoints(userId) {
         throw error;
     }
 }
+
+export async function getUserPoints(userId) {
+    try {
+       return await UserPointsEntity.findOne({userId});
+    } catch (error) {
+        throw error;
+    }
+}

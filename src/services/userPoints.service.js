@@ -6,3 +6,11 @@ export  async function createUserPoints(userId) {
         throw error;
     }
 }
+
+export  async function getUserPoints(userId) {
+    try {
+        return await userPointsRepository.getUserPoints(userId);
+    } catch (error) {
+        throw error;
+    }
+}

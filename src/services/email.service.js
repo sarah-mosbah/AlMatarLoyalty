@@ -9,14 +9,13 @@ const transporter = nodemailer.createTransport({
   });
   
 
-export async function sendEmail(email, transactionId) {
+export async function sendEmail(email, points) {
     try {
         const mailOptions = {
             from:  process.env.USER_EMAIL,
             to: email,
             subject: 'points transfere',
-            text: `you got new points please click on this link ${process.env.API_BASE_URL}/api/transfere/accept/${transactionId} 
-            within 10 mins to get your points` 
+            text: `you've received new points: ${points}` 
         }; 
         await transporter.sendMail(mailOptions);
     } catch (error) {

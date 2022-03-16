@@ -30,3 +30,9 @@ export async function signIn(req, res) {
     }
        
 }
+
+
+
+export async function getUserPoints(req, res) {
+    
+}
